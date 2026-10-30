@@ -1,0 +1,7 @@
+{
+  "SCN-CAPACITY":{"issue_type":"CAPACITY_EXCEEDED","expected_action":"REJECT"},
+  "SCN-ACCESSIBILITY":{"issue_type":"ACCESSIBILITY_MISMATCH","expected_action":"REJECT"},
+  "SCN-TRAVEL":{"issue_type":"IMPOSSIBLE_TRAVEL_TIME","expected_action":"MARK_INFEASIBLE"},
+  "SCN-CONTACT":{"issue_type":"INVALID_GUARDIAN_CONTACT","expected_action":"SUPPRESS"},
+  "SCN-ADDRESS":{"issue_type":"UNAPPROVED_ADDRESS_EXPOSURE","expected_action":"REDACT_AND_AUDIT"}
+}

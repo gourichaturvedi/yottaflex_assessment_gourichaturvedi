@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.py[cod]
+*.egg-info/
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+data/generated/*
+!data/generated/.gitkeep

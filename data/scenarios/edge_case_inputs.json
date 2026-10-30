@@ -1,0 +1,9 @@
+{
+  "scenarios": [
+    {"scenario_id":"SCN-CAPACITY","fixture":{"occupancy":40,"capacity":40,"candidate_seats":1}},
+    {"scenario_id":"SCN-ACCESSIBILITY","fixture":{"accessibility_required":true,"bus_accessible":false,"stop_accessible":true}},
+    {"scenario_id":"SCN-TRAVEL","fixture":{"previous_departure":"07:05","travel_minutes":20,"next_arrival":"07:10"}},
+    {"scenario_id":"SCN-CONTACT","fixture":{"active":true,"verified":false,"consent":true,"email":"guardian@example.invalid"}},
+    {"scenario_id":"SCN-ADDRESS","fixture":{"approved":false,"role":"INSTRUCTOR","attempt":"view_full_address"}}
+  ]
+}
