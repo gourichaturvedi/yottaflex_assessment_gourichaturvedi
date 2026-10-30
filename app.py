@@ -11,12 +11,46 @@ from transport_ops.scenarios import evaluate_scenarios
 from transport_ops.metrics import metrics_snapshot
 
 st.set_page_config(page_title="YottaFlex Student Transport Ops",layout="wide")
-st.title("Student Transport Routing & Daily Operations")
-st.caption("Synthetic local challenge demo · Demo role switcher is not secure authentication")
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root { --ink:#172b35; --muted:#6a7b7d; --paper:#f4f3ed; --panel:#fffefa; --line:#dce2dc; --lime:#d6ed65; --orange:#f08a52; }
+.stApp { background:var(--paper); color:var(--ink); font-family:'Manrope',sans-serif; }
+[data-testid="stHeader"] { background:transparent; }
+[data-testid="stSidebar"] { background:#172b35; border-right:0; }
+[data-testid="stSidebar"] * { color:#edf1e9 !important; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label { padding:8px 10px; border-radius:7px; }
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover { background:#29414a; }
+[data-testid="stSidebar"] input { color:#172b35 !important; }
+.block-container { max-width:1500px; padding-top:2rem; padding-bottom:3rem; }
+h1,h2,h3 { color:var(--ink); letter-spacing:-.045em; font-family:'Manrope',sans-serif; }
+h1 { font-size:2.5rem !important; font-weight:800 !important; }
+h2 { font-weight:800 !important; }
+[data-testid="stMetric"] { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px 18px; box-shadow:0 2px 8px #172b3508; }
+[data-testid="stMetricLabel"] { color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.09em; font-weight:700; }
+[data-testid="stMetricValue"] { color:var(--ink); font-weight:800; }
+[data-testid="stDataFrame"] { border:1px solid var(--line); border-radius:9px; overflow:hidden; background:var(--panel); }
+div.stButton > button { background:var(--ink); color:white; border:0; border-radius:6px; font-weight:700; padding:.55rem 1rem; }
+div.stButton > button:hover { background:#29414a; color:var(--lime); border:0; }
+[data-testid="stTextInput"] input, [data-testid="stNumberInput"] input, [data-testid="stSelectbox"] div[data-baseweb="select"] { border-radius:6px; }
+.yf-mast { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); padding:0 0 14px; margin-bottom:30px; }
+.yf-brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:.03em; font-size:13px; text-transform:uppercase; }
+.yf-mark { display:grid; place-items:center; width:32px; height:32px; border-radius:7px; color:var(--ink); background:var(--lime); font-weight:900; }
+.yf-micro { color:var(--muted); font:11px 'DM Mono',monospace; letter-spacing:.04em; text-transform:uppercase; }
+.yf-kicker { color:#658044; font:11px 'DM Mono',monospace; letter-spacing:.12em; text-transform:uppercase; margin-bottom:7px; }
+.yf-note { border-left:3px solid var(--orange); padding:10px 14px; background:#fffefa; color:#536467; font-size:.9rem; }
+@media (max-width:800px) { h1 {font-size:1.9rem !important;} .yf-micro{display:none;} }
+</style>
+<div class="yf-mast"><div class="yf-brand"><span class="yf-mark">Y</span><span>YottaFlex <span style="font-weight:500;color:#6a7b7d">/ Transit operations</span></span></div><div class="yf-micro">FIELD SYSTEMS&nbsp;&nbsp;·&nbsp;&nbsp;LOCAL DEMO</div></div>
+""",unsafe_allow_html=True)
 role=st.sidebar.selectbox("Demo role",["Platform administrator","Academic administrator","Instructor","Support staff","Learner"])
 database=st.sidebar.text_input("SQLite database","data/generated/transport_ops.sqlite")
 pages=["Overview Dashboard","Data Setup and Generator","Route Planning","Students and Assignments","Daily Operations","Exceptions / Exception Lab","Data Explorer and Validation","Documentation and About"]
 page=st.sidebar.radio("Page",pages)
+page_titles={"Overview Dashboard":"Daily transport, under control.","Data Setup and Generator":"Build a service dataset.","Route Planning":"Routes at a glance.","Students and Assignments":"People and their journeys.","Daily Operations":"Today’s service, live.","Exceptions / Exception Lab":"Find the edge cases.","Data Explorer and Validation":"Inspect the underlying data.","Documentation and About":"How this demo works."}
+st.markdown('<div class="yf-kicker">Student mobility · Operations console</div>',unsafe_allow_html=True)
+st.title(page_titles[page])
+st.caption("Local operations demo · Synthetic student and route data · Role selector is for demonstration only")
 
 def count(s,model): return s.scalar(select(func.count()).select_from(model)) or 0
 if not Path(database).exists():
